@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #a{
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis
+    }
+  </style>
+</head>
+<body>
+  <div id="a" style="width: 50px">dasdsadasdsadddddddddddddddddddddddddddddddddddddddddddddddd</div>
+  <img src="./src/assets/logo.png" alt="" style="height:100px;width: 200px">
+  <script>
+    // 两个undefined想加等于NaN
+    var a,b
+    console.log(a+b);  
+    // 查询字符串转换对象 
+    var a = '?k=1&l=2&p=3&o=4'
+    function s (a){
+      var obj = {}
+      var str = a.slice(1)
+			    str = str.split('&')
+          str.forEach((item,index) => {
+           obj[item.split('=')[0]]=item.split('=')[1]
+          });
+          return obj
+    }
+    s(a)
+    console.log("TCL: s(a)", s(a))
+    // 数组去重1
+    var arr = [1,1,1,1,2,3,4,5,5,2132]
+    function quchong (arr){
+      return [...new Set(arr)]
+    }
+    quchong(arr)
+    console.log("TCL: quchong(arr)", quchong(arr))
+    // 数组去重2
+    function quchong1 (arr){
+      var arr1 = []
+      arr.forEach((item,index)=>{
+          if(arr1.indexOf(item) == -1){
+            arr1.push(item)
+          }
+      })
+      return arr1 
+    }
+    quchong1(arr)
+    console.log("TCL: quchong1(arr)", quchong1(arr))
+    // 数组排序
+    var sort = [4,623,4321,4,,67,,34,,7,8,1,8,]
+    console.log(sort.sort((a,b)=>{
+        return a-b
+    }))
+    // 冒泡排序
+    function kk (sort){
+     for (let i = 0; i < sort.length-1; i++) {
+       for (let j = 0; j < sort.length-1-i; j++) {
+            if(sort[j]<sort[j+1]){
+              var kk =  sort[j]
+              sort[j] =sort[j+1]
+              sort[j+1] =kk
+            }
+       }
+     }
+     return sort
+    }
+    console.log(kk(sort))
+    // 0.300000000000000000000004
+    console.log(0.1+0.2)
+    // 数组是对象  ，但是对象不是 数组
+    function k(){
+
+    }
+    var b ={}
+    console.log(b instanceof Function)
+    
+    // 用闭包实现一个功能
+    function q (){
+      var a =0
+      return function(){
+        console.log(++a)
+      }
+    }
+    var b = q()
+    b()
+    b()
+    b()
+    var b = null
+
+
+    // 用闭包 实现圆周率
+    function yuan (){
+      var pai = 3
+
+      return {
+        suan(R){
+          console.log(pai*R*R)
+        }
+      }
+    }
+   var h =  yuan()
+   h.suan(2)
+
+
+
+
+// promise。all
+let p1 = new Promise((resolve, reject) => {
+  resolve('成功了')
+})
+
+let p2 = new Promise((resolve, reject) => {
+  resolve('success')
+})
+
+let p3 = Promise.reject('失败')
+
+Promise.all([p1, p2]).then((result) => {
+  console.log(result)               //['成功了', 'success']
+}).catch((error) => {
+  console.log(error)
+})
+
+Promise.all([p1,p3,p2]).then((result) => {
+  console.log(result)
+}).catch((error) => {
+  console.log(error)      // 失败了，打出 '失败'
+})
+
+// http 缓存的位置
+console.log(window.location,1111)
+console.log(1111)
+
+// promise 封装
+// export default function ajax(url, data={}, method='GET') {
+
+//   return new Promise((resolve, reject) => {
+//     let promise
+//     // 执行异步请求
+//     if(method==='GET') {
+//       promise = axios.get(url,  {params: data})  // 指定所有的query参数
+//     } else {
+//       promise = axios.post(url, data)
+//     }
+
+//     promise.then(response => {
+//       // 请求成功, 调用resolve
+//       resolve(response.data)
+//     }).catch(error => {
+//       // 请求失败调用reject
+//       // reject(error)
+//       // 统一处理请求错误, 外面使用async/await不用使用try来处理错误
+//       alert('请求出错', error.message)
+//     })
+//   })
+// }
+
+
+// es6 assign
+var a ={
+  a:1
+}
+var b ={
+  b:1
+}
+var c={}
+
+Object.assign(c,a,b)
+console.log(c)
+
+// 利用async和await 模拟 promise。all
+function getName () {
+    return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            resolve('tony')
+        }, 3000)
+    })
+}
+function getId () {
+    return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            resolve('123')
+        }, 1000)
+    })
+}
+
+
+// 这样写就会并行了  
+;(async ()=>{
+    let s = getName()
+    let x = getId()
+    let name = await s
+    let id = await x
+    alert(`name:${name}, id:${id}`)
+})() 
+
+const promise = new Promise((resolve, reject) => {
+    console.log(1);
+    resolve();
+    console.log(2);
+})
+promise.then(() => {
+    console.log(3);
+})
+console.log(4)
+
+
+  </script>
+</body>
+</html>
